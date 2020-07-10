@@ -1,0 +1,83 @@
+{
+    "ID": 0,
+    "players": [],
+    "type": "Assassins",
+    "name": "",
+    "reputation": "",
+    "lairname": "",
+    "rep": 0,
+    "turf": 0,
+    "hold": "weak",
+    "tier": 0,
+    "claims": [[
+        [0, "Training Rooms", "+1 scale for your Skulks cohorts", "", "\u25A1", "\u25A1", ""], 
+        [0, "Vice Den", "(Tier roll) - Heat = coin in downtime", "", "", "\u25A1", "\u25A1"], 
+        [0, "Fixer", "+2 for lower class targets", "", "", "\u25A1", ""], 
+        [0, "Informants", "+1d gather info for scores", "", "\u25A1", "\u25A1", ""], 
+        [0, "Hagfish Farm", "Body disposal, +1d to reduce heat for killing", "", "", "\u25A1", "\u25A1"]], 
+        [[0, "Victim Trophies", "+1 rep per score", "\u25A1", "", "\u25A1", ""], 
+        [0, "Turf", "", "\u25A1", "\u25A1", "\u25A1", ""], 
+        [1, "Lair", "", "\u25A1", "\u25A1", "\u25A1", "\u25A1"],
+        [0, "Turf", "", "\u25A1", "\u25A1", "", "\u25A1"],
+        [0, "Cover Operation", "-2 Heat per score", "\u25A1", "", "\u25A1", "\u25A1"]], [ 
+        [0, "Protection Racket", "(Tier roll) - Heat = coin in downtime", "\u25A1", "\u25A1", "", ""], 
+        [0, "Infirmary", "+1d to healing rolls", "\u25A1", "", "", "\u25A1"], 
+        [0, "Envoy", "+2 coin for high-class targets", "\u25A1", "", "", ""], 
+        [0, "Cover Identities", "+1d engagement for deception and social plans", "", "\u25A1", "", ""], 
+        [0, "City Records", "+1d engagement for stealth plans", "\u25A1", "", "", "\u25A1"]]],
+    "heat": 0,
+    "wanted level": 0,
+    "coin": 0,
+    "xp": 0,
+    "specials": {
+        "one": [0, "Deadly: Each PC may add +1 action rating to Hunt, Prowl, or Skirmish( up to a mx rating of 3)"],
+        "two": ["\u25EF", "Crow's Veil: Due to hard-won experience or occult ritual,your activities are hidden from the notice of the death-seeker crows. You don't take extra heat when killing is involved on a score"],
+        "three": ["\u25EF", "Emberdeath: Due to hard-won experience or occult ritual, you know the arcane method to destroy a living victim's spirit at the moment you kill them. Take 3 stress to channel electroplasmic energy from the ghost field to disintegrate the spirit and dead body in a shower of sparking embers"],
+        "four": ["\u25EF", "No Traces: When you keep an operation quiet or make it look like an accident, you get half the rep value of the target (round up) instead of zero. When you end downtime with zero heat, take +1 rep"],
+        "five": ["\u25EF", "Patron: When you advance your Tier, it costs half the coin it normally would. Who is your patron? Why do they help you?"],
+        "six": ["\u25EF", "Vipers: When you acquire or craft poisons, you get +1 result level on your roll. When you employ a poison, you are specially prepared to be immune from its effects"],
+        "seven": [0, "Veteren: Choose a special ability from another crew"]
+    },
+    "contacts": {
+    "one": ["\u25b3", "Trev, a gang boss"],
+    "two": ["\u25b3", "Lydra, a deal broker"],
+    "three": ["\u25b3", "Irimina, a vicious noble"],
+    "four": ["\u25b3", "Karlos, a bounty hunter"],
+    "five": ["\u25b3", "Exeter, a spirit warden"],
+    "six": ["\u25b3", "Sevoy, a merchant lord"]
+    },
+    "upgrades": {
+        "one": ["\u25A1", "Assassin rigging (2 free load for weapons and gear)"],
+        "two": ["\u25A1", "Ironhook Contacts (+1 Tier in prison)"],
+        "three": ["\u25A1", "Elite Skulks"],
+        "four": ["\u25A1", "Elite Thugs"],
+        "five": [0, "Hardened (+1 trauma box"]
+    },
+    "lair": {
+        "one": ["\u25A1", "\u25A1", "Carriage"],
+        "two": ["\u25A1", "\u25A1", "Boat"],
+        "three": ["\u25A1", "Hidden"],
+        "four": ["\u25A1", "Quarters"],
+        "five": ["\u25A1", "\u25A1", "Secure"],
+        "six": ["\u25A1", "\u25A1", "Vault"],
+        "seven": ["\u25A1", "\u25A1", "Workshop"]
+    },
+    "quality": {
+        "one": ["\u25A1", "Documents"],
+        "two": ["\u25A1", "Gear"],
+        "three": ["\u25A1", "Implements"],
+        "four": ["\u25A1", "Supplies"],
+        "five": ["\u25A1", "Tools"],
+        "six": ["\u25A1", "Weapons"]
+    },
+    "training": {
+        "insight": "\u25A1",
+        "prowess": "\u25A0",
+        "resolve": "\u25A1",
+        "personal": "\u25A1",
+        "mastery": 0
+    },
+    "clocks": [],
+    "notes": []
+
+}
