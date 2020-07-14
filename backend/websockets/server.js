@@ -1,15 +1,16 @@
-const express = require('express')
-const socket = require('socket.io');
-const http = require('http');
-const router = require('./router');
-const mongoose = require('mongoose');
-let Player = require('../models/player.model');
-let Character = require('../models/character.model');
-let Crew = require('../models/crew.model');
-const { updateOne } = require('../models/player.model');
-const { findOneAndUpdate} = require('../models/crew.model');
+const express = require("express");
+const socket = require("socket.io");
+const http = require("http");
+const router = require("./router");
+const mongoose = require("mongoose");
+let Player = require("../models/player.model");
+let Character = require("../models/character.model");
+let Crew = require("../models/crew.model");
+const { updateOne } = require("../models/player.model");
+const { findOneAndUpdate } = require("../models/crew.model");
 // const { default: Character } = require('../../src/components/Character');
 
+require("dotenv").config();
 
 const PORT = process.env.PORT || 5000;
 
@@ -24,8 +25,8 @@ useUnifiedTopology: true });
 
 const connection = mongoose.connection;
 
-connection.once('open',() => {
-    console.log('MongoDB database connection established successfully')
+connection.once("open", () => {
+  console.log("MongoDB database connection established successfully");
 });
 
 
@@ -76,35 +77,46 @@ io.sockets.on('connection', (socket) => {
         // players, type
         // , crewname, reputation, lairname, rep, turf, hold, tier, claims, heat, wantedlevel, coin, xp, specials1, specials2, specials3, specials4, specials5, specials6, specials7, contacts1, contacts2, contacts3, contacts4, contacts5, contacts6, upgrades1, upgrades2, upgrades3, upgrades4, upgrades5, lair1, lair2, lair3, lair4, lair5, lair6, lair7, quality1, quality2, quality3, quality4, quality5, quality6, traininginsight, trainingprowess, trainingresolve, trainingpersonal, mastery, clocks, notes
     }) => {
-        const newCrew = new Crew({gm})
-        newCrew.save()
-        if (gm == true) {
-        Player.findOneAndUpdate({'_id': playerId}, {$push: {'gms': newCrew['_id']}})
-        };
-        socket.emit('newcrewid', {crew: newCrew['_id']})
-        console.log('claled')
-    })
+      const newCrew = new Crew({ gm });
+      newCrew.save();
+      if (gm == true) {
+        Player.findOneAndUpdate(
+          { _id: playerId },
+          { $push: { gms: newCrew["_id"] } }
+        );
+      }
+      socket.emit("newcrewid", { crew: newCrew["_id"] });
+      console.log("claled");
+    }
+  );
 
-    socket.on('getcrews', ({id}) => {
-        Player.findOne({'_id': id})
-        .then(player => {
-            let namesAndCharIds = []
-            chars = player.characters;
-            for (i in chars) {
-                Character.findOne({'_id':i})
-                .then(character => {
-                    namesAndCharIds.push([i, character.firstname, character.alias, character.lastname])
-                })
-            }
-            console.log(namesAndCharIds);
-            socket.emit('returnchars', {chars: namesAndCharIds})
-        })
-
-
-    })  
-    socket.on('createchar', ( { crewId, firstname, alias, lastname
-        // crew, type, firstname, lastname, alias, insightxp
-        // , alias, look, heritage, background, insightxp, hunt, study, survey, tinker, prowessxp, finesse, prowl, skirmish, wreck, resolvexp, attune, command, consort, sway, vice, stress, trauma, harm3, harm2, harm1, healing, armornormal, armorheavy, armorspecial, specialsxp, specials1, specials2, specials3, specials4, specials5, specials6, specials7, specials8, specials9, friends1, friends2, friends3, friends4, friends5, items1, items2, items3, items4, items5, items6, load, gear1, gear2, gear3, gear4, gear5, gear6, gear7, gear8, gear9, gear10, gear11, gear12, gear13, gear14, gear15, gear16, coin, stash, notes
+  socket.on("getcrews", ({ id }) => {
+    Player.findOne({ _id: id }).then((player) => {
+      let namesAndCharIds = [];
+      chars = player.characters;
+      for (i in chars) {
+        Character.findOne({ _id: i }).then((character) => {
+          namesAndCharIds.push([
+            i,
+            character.firstname,
+            character.alias,
+            character.lastname,
+          ]);
+        });
+      }
+      console.log(namesAndCharIds);
+      socket.emit("returnchars", { chars: namesAndCharIds });
+    });
+  });
+  socket.on(
+    "createchar",
+    ({
+      crewId,
+      firstname,
+      alias,
+      lastname,
+      // crew, type, firstname, lastname, alias, insightxp
+      // , alias, look, heritage, background, insightxp, hunt, study, survey, tinker, prowessxp, finesse, prowl, skirmish, wreck, resolvexp, attune, command, consort, sway, vice, stress, trauma, harm3, harm2, harm1, healing, armornormal, armorheavy, armorspecial, specialsxp, specials1, specials2, specials3, specials4, specials5, specials6, specials7, specials8, specials9, friends1, friends2, friends3, friends4, friends5, items1, items2, items3, items4, items5, items6, load, gear1, gear2, gear3, gear4, gear5, gear6, gear7, gear8, gear9, gear10, gear11, gear12, gear13, gear14, gear15, gear16, coin, stash, notes
     }) => {
         const newChar = new Character({crewId, firstname, alias, lastname
             //  crew, type, firstname, lastname, alias, insightxp
@@ -158,4 +170,4 @@ io.sockets.on('connection', (socket) => {
 
 app.use(router);
 
-server.listen(PORT, () => console.log('Server is working'))
+server.listen(PORT, () => console.log("Server is working"));
