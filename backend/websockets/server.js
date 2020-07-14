@@ -11,15 +11,14 @@ const { findOneAndUpdate} = require('../models/crew.model');
 // const { default: Character } = require('../../src/components/Character');
 
 
-
-require('dotenv').config();
-
 const PORT = process.env.PORT || 5000;
 
 const app = express();
 const server = http.createServer(app);
 
 const uri = process.env.ATLAS_URI;
+//"mongodb+srv://dungphan:87aPgVf1kNTBexrp@cluster0.7lcj9.mongodb.net/nam?retryWrites=true&w=majority"
+console.log(uri)
 mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true,
 useUnifiedTopology: true });
 
@@ -29,11 +28,13 @@ connection.once('open',() => {
     console.log('MongoDB database connection established successfully')
 });
 
+
 const io = socket(server);
 
 io.sockets.on('connection', (socket) => {
     console.log('We have a new connection');
 
+    //done
     socket.on('login', ({ username }, callback) => {
         console.log(username);
 
@@ -46,6 +47,8 @@ io.sockets.on('connection', (socket) => {
             }
         })   
     })
+
+    //done
     socket.on('signup', ({ username, hash, characters, gm }, callback) => {
         const password = hash
 
@@ -67,6 +70,8 @@ io.sockets.on('connection', (socket) => {
             socket.emit('playertoclient', {player: player})
         })
     })
+
+    //done
     socket.on('createcrew', ({playerId, gm 
         // players, type
         // , crewname, reputation, lairname, rep, turf, hold, tier, claims, heat, wantedlevel, coin, xp, specials1, specials2, specials3, specials4, specials5, specials6, specials7, contacts1, contacts2, contacts3, contacts4, contacts5, contacts6, upgrades1, upgrades2, upgrades3, upgrades4, upgrades5, lair1, lair2, lair3, lair4, lair5, lair6, lair7, quality1, quality2, quality3, quality4, quality5, quality6, traininginsight, trainingprowess, trainingresolve, trainingpersonal, mastery, clocks, notes
@@ -126,28 +131,27 @@ io.sockets.on('connection', (socket) => {
         console.log(Player.findOne({'_id': id}).characters)
     })
 
-    socket.on('addcrewsandchars', ({charId, crewId}, callback) => {
-        Character.findOneAndUpdate({'_id': charId}, {'crewId': crewId});
-        Crew.findOneAndUpdate({'_id': '5ef5064e004b112db6c0ffc9'}, {gm: '5ef50698004b112db6c0ffca'});        
+    socket.on('addcrewsandchars', async ({charId, crewId}, callback) => {
+        Character.findOneAndUpdate({'_id': charId}, {'crewId': crewId});   
+        await Crew.findOneAndUpdate({'_id': crewId}, {gm: "5ef50698004b112db6c0ffca"});   
         let arrayChars = ["kmsadkm"];
-        Crew.findOneAndUpdate({'_id': '5ef5064e004b112db6c0ffc9'}, {gm: crewId});
-        console.log(crewId)
-        Crew.findById(crewId)
+        Crew.findById(crewId)   
         .then(crew => {
             console.log(crew)
-            // arrayChars = crew.characters
+            arrayChars = crew.characters
             arrayChars.push(crewId)
             console.log(arrayChars)
-            Crew.updateOne({ '_id': crewId}, {characters: arrayChars});
+            Crew.updateOne({ '_id': crewId}, {$set:{characters: arrayChars}});
             socket.emit('test1', {response: arrayChars});
         })
-        Crew.findOneAndUpdate({'_id': crewId}, {'characters': arrayChars})
-        console.log(Crew.findOne({'_id': crewId}))
-        console.log(Crew.findOne(crewId))
+        Crew.findOneAndUpdate({'_id': crewId}, {$set: {'characters': arrayChars}})
+        //console.log(Crew.findOne({'_id': crewId}))
+        //console.log(Crew.findOne(crewId))
     })
 
+    //và đây
     socket.on('test2', ({test2pass}, callback) => {
-        console.log(test2pass)
+        //console.log(test2pass)
         Crew.findOneAndUpdate({'_id': test2pass[1]}, {'gm': test2pass[0]})
     })
 })

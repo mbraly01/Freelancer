@@ -10,7 +10,7 @@ export default function Character(props) {
 
 
     const [charId, setCharId] = useState('5ef50698004b112db6c0ffca');
-    const [crewId, setCrewId] = useState('5ef5064e004b112db6c0ffc9')
+    const [crewId, setCrewId] = useState('5f0c1a0da7b8bd2096cc05c7')
     const [char, setChar] = useState();
     const [playerChars, setPlayerChars] = useState();
     const gear1 = ["empty", 1, 4];
@@ -22,6 +22,8 @@ export default function Character(props) {
     let insightxp = 0;
     const ENDPOINT = 'localhost:5000';
 
+
+    /// chac no bi loi o
     async function createChar() {
         socket.emit('createchar', {crewId, firstname, alias, lastname
             // , type, firstname, alias, lastname, insightxp, gear1

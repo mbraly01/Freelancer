@@ -18,6 +18,7 @@ export default function Crew(props) {
         socket.emit('createcrew', {playerId: props.cookies.id, gm: gm})
         socket.on('newcrewid', (response) => {
             setCrewId(response.crew)
+            console.log(response.crew)
         })
     }
 
