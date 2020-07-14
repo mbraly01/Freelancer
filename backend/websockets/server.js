@@ -19,7 +19,6 @@ const server = http.createServer(app);
 
 const uri = process.env.ATLAS_URI;
 //"mongodb+srv://dungphan:87aPgVf1kNTBexrp@cluster0.7lcj9.mongodb.net/nam?retryWrites=true&w=majority"
-console.log(uri)
 mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true,
 useUnifiedTopology: true });
 
@@ -138,7 +137,6 @@ io.sockets.on('connection', (socket) => {
 
     socket.on('addchartoplayer', ({id, charids}, callback) => {
         console.log(id)
-        console.log(charids)
         Player.findOneAndUpdate({'_id': id}, {'characters': charids})
         console.log(Player.findOne({'_id': id}).characters)
     })
@@ -161,7 +159,6 @@ io.sockets.on('connection', (socket) => {
         //console.log(Crew.findOne(crewId))
     })
 
-    //và đây
     socket.on('test2', ({test2pass}, callback) => {
         //console.log(test2pass)
         Crew.findOneAndUpdate({'_id': test2pass[1]}, {'gm': test2pass[0]})
