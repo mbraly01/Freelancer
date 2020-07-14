@@ -30,10 +30,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start:server": "nodemon backend/websockets/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start:server": "nodemon --inspect ./backend/websockets/server.js"
   },
   "eslintConfig": {
     "extends": "react-app"
